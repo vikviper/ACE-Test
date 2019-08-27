@@ -4,3 +4,5 @@ __history
 Main.dcu
 *.dcu
 __recovery
+ACETest.identcache
+ACETest.dproj.local
