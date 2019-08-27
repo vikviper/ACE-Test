@@ -1,2 +1,6 @@
 /Win64/Debug/*.exe
 __history
+*.rsm
+Main.dcu
+*.dcu
+__recovery
