@@ -85,8 +85,8 @@ begin
 
       j := 0;
       while (j < i) and
-            (capitoloSelezionato <> capitoli[j]) and
-            (domandaSelezionata <> domande[j]) do
+            ( (capitoloSelezionato <> capitoli[j]) or
+              (domandaSelezionata <> domande[j]) ) do
         Inc(j);
 
       if j = i then
