@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.StdCtrls,
   Data.DbxSqlite, Data.FMTBcd, Data.SqlExpr, Vcl.DBCtrls, Data.DBXTrace,
-  Data.DBXMySQL, Vcl.ExtCtrls, DateUtils;
+  Data.DBXMySQL, Vcl.ExtCtrls, DateUtils, Vcl.CheckLst, UITypes;
 
 type
   TfDomanda = class(TForm)
@@ -25,6 +25,7 @@ type
     lbContatore: TLabel;
     Timer1: TTimer;
     lbTimer: TLabel;
+    clbRisultato: TCheckListBox;
     procedure FormShow(Sender: TObject);
     procedure btDaiRispostaClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -109,6 +110,9 @@ begin
     end; //for
   end; // if..else
 
+  for i := 1 to numDomande do
+    clbRisultato.Items.Append('#'+ IntToStr(i) +' Cap. '+ IntToStr(capitoli[i-1]) +' Dom. ' +IntToStr(domande[i-1]));
+
   currentIndex := 0;
   esatteCont := 0;
   dbConnection.Open;
@@ -132,7 +136,7 @@ begin
       lbIntestazioneDomanda.Caption :=
         'Capitolo ' + intToStr(capitoli[currentIndex]) +
         ' Domanda numero ' + intToStr(domande[currentIndex]);
-      lbContatore.Caption := IntToStr(currentIndex+1) +'/'+ IntToStr(numDomande);
+      lbContatore.Caption := 'Domanda '+ IntToStr(currentIndex+1) +' di '+ IntToStr(numDomande);
       memoNoteRispostaEsatta.Clear;
 
       with qDomanda do begin
@@ -212,6 +216,7 @@ var
   numRispEsatte: integer;
   numRispErrate: integer;
 begin
+  clbRisultato.Checked[currentIndex] := true;
   with uDomanda do begin
     numRispEsatte := qDomanda.FieldByName('Num_Risp_Esatte').Value + 1;
     numRispErrate := qDomanda.FieldByName('Num_Risp_Err').Value;
@@ -242,7 +247,7 @@ begin
     ParamByName('capitolo').Value := capitoli[currentIndex];
     ParamByName('numeroDomanda').Value := domande[currentIndex];
     ExecSQL;
-    ShowMessage('Risposta Errata!');
+    MessageDlg('Risposta Errata!',mtError, [mbOK], 0);
     esatte[currentIndex] := false;
   end; // with
 

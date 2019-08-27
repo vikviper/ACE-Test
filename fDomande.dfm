@@ -2,8 +2,8 @@ object fDomanda: TfDomanda
   Left = 0
   Top = 0
   Caption = 'Quiz'
-  ClientHeight = 691
-  ClientWidth = 883
+  ClientHeight = 697
+  ClientWidth = 1200
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -30,7 +30,7 @@ object fDomanda: TfDomanda
     ParentFont = False
   end
   object lbEsatte: TLabel
-    Left = 731
+    Left = 721
     Top = 601
     Width = 152
     Height = 19
@@ -44,8 +44,8 @@ object fDomanda: TfDomanda
     ParentFont = False
   end
   object lbContatore: TLabel
-    Left = 801
-    Top = -1
+    Left = 1118
+    Top = 5
     Width = 74
     Height = 19
     Alignment = taRightJustify
@@ -134,6 +134,14 @@ object fDomanda: TfDomanda
     ParentFont = False
     ReadOnly = True
     TabOrder = 3
+  end
+  object clbRisultato: TCheckListBox
+    Left = 880
+    Top = 24
+    Width = 313
+    Height = 659
+    ItemHeight = 13
+    TabOrder = 4
   end
   object dbConnection: TSQLConnection
     DriverName = 'Sqlite'
