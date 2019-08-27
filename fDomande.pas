@@ -65,23 +65,38 @@ end;  // FormClose()
 *)
 procedure TfDomanda.FormShow(Sender: TObject);
   var
-    i: byte;
-    domanda: byte;
-    TimeOut : TDateTime;
+    i, j: byte;
+    domandaSelezionata: byte;
+    capitoloSelezionato: byte;
+    TimeOut: TDateTime;
 begin
   if casuali then begin
     SetLength(capitoli, numDomande);
     SetLength(domande, numDomande);
     SetLength(esatte, numDomande);
-    for i := 0 to numDomande-1 do
+    i := 0;
+    while i < numDomande do
     begin
-      domanda := Random(21)+1;
-      if (domanda = 21) then
-        capitoli[i] := 13
+      domandaSelezionata := Random(21)+1;
+      if (domandaSelezionata = 21) then
+        capitoloSelezionato := 13
       else
-        capitoli[i] := Random(18)+1;
-      domande[i] := domanda;
-    end; //for
+        capitoloSelezionato := Random(18)+1;
+
+      j := 0;
+      while (j < i) and
+            (capitoloSelezionato <> capitoli[j]) and
+            (domandaSelezionata <> domande[j]) do
+        Inc(j);
+
+      if j = i then
+      begin
+        domande[i] := domandaSelezionata;
+        capitoli[i] := capitoloSelezionato;
+        Inc(i);
+      end; // if
+
+    end; // while
   end else begin
     if capitolo = 13 then numDomande := 21 else numDomande := 20;
     SetLength(capitoli, numDomande);
