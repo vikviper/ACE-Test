@@ -16,7 +16,7 @@ object fMain: TfMain
   TextHeight = 13
   object bt50casuali: TButton
     Left = 8
-    Top = 8
+    Top = 32
     Width = 129
     Height = 25
     Caption = '50 domande casuali'
@@ -25,7 +25,7 @@ object fMain: TfMain
   end
   object bt25Casuali: TButton
     Left = 8
-    Top = 39
+    Top = 63
     Width = 129
     Height = 25
     Caption = '25 domande casuali'
@@ -34,7 +34,7 @@ object fMain: TfMain
   end
   object bt20Casuali: TButton
     Left = 8
-    Top = 70
+    Top = 94
     Width = 129
     Height = 25
     Caption = '20 domande casuali'
@@ -43,7 +43,7 @@ object fMain: TfMain
   end
   object btNCasuali: TButton
     Left = 8
-    Top = 101
+    Top = 125
     Width = 129
     Height = 25
     Caption = 'N domande casuali'
@@ -52,7 +52,7 @@ object fMain: TfMain
   end
   object btCapitolo: TButton
     Left = 8
-    Top = 132
+    Top = 156
     Width = 129
     Height = 25
     Caption = 'Domande sul Capitolo'
@@ -61,7 +61,7 @@ object fMain: TfMain
   end
   object teCapitolo: TEdit
     Left = 167
-    Top = 132
+    Top = 156
     Width = 26
     Height = 25
     Alignment = taRightJustify
@@ -81,7 +81,7 @@ object fMain: TfMain
   end
   object teNDomande: TEdit
     Left = 167
-    Top = 101
+    Top = 125
     Width = 26
     Height = 25
     Alignment = taRightJustify
@@ -98,5 +98,14 @@ object fMain: TfMain
     ParentFont = False
     TabOrder = 6
     Text = '10'
+  end
+  object btTutte: TButton
+    Left = 8
+    Top = 1
+    Width = 129
+    Height = 25
+    Caption = 'TUTTE!'
+    TabOrder = 7
+    OnClick = btTutteClick
   end
 end

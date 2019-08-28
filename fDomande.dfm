@@ -30,12 +30,12 @@ object fDomanda: TfDomanda
     ParentFont = False
   end
   object lbEsatte: TLabel
-    Left = 721
+    Left = 711
     Top = 601
-    Width = 152
+    Width = 162
     Height = 19
     Alignment = taRightJustify
-    Caption = 'Risposte Esatte 20'
+    Caption = 'Risposte Esatte 361'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -58,12 +58,12 @@ object fDomanda: TfDomanda
     ParentFont = False
   end
   object lbTimer: TLabel
-    Left = 762
-    Top = 394
-    Width = 113
-    Height = 38
+    Left = 808
+    Top = 415
+    Width = 66
+    Height = 19
     Alignment = taRightJustify
-    Caption = 'Tempo rimasto 00:00:00'
+    Caption = '00:00:00'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -73,11 +73,25 @@ object fDomanda: TfDomanda
     Transparent = True
     Layout = tlCenter
     WordWrap = True
+    OnClick = lbTimerClick
+  end
+  object Label1: TLabel
+    Left = 762
+    Top = 394
+    Width = 112
+    Height = 19
+    Caption = 'Tempo Rimasto'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
   end
   object rgRisposte: TRadioGroup
     Left = 8
     Top = 394
-    Width = 709
+    Width = 697
     Height = 289
     Caption = 'Risposte'
     Font.Charset = DEFAULT_CHARSET
@@ -105,9 +119,9 @@ object fDomanda: TfDomanda
     TabOrder = 0
   end
   object btDaiRisposta: TButton
-    Left = 743
+    Left = 711
     Top = 626
-    Width = 132
+    Width = 164
     Height = 57
     Caption = 'RISPONDI'
     Font.Charset = DEFAULT_CHARSET
@@ -322,7 +336,7 @@ object fDomanda: TfDomanda
   object Timer1: TTimer
     Enabled = False
     OnTimer = Timer1Timer
-    Left = 736
+    Left = 712
     Top = 393
   end
 end

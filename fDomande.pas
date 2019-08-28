@@ -26,19 +26,21 @@ type
     Timer1: TTimer;
     lbTimer: TLabel;
     clbRisultato: TCheckListBox;
+    Label1: TLabel;
     procedure FormShow(Sender: TObject);
     procedure btDaiRispostaClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     function IfNull(const Value, Default: OleVariant): OleVariant;
     function SecsToHmsStr(ASecs: integer): string;
     procedure Timer1Timer(Sender: TObject);
+    procedure lbTimerClick(Sender: TObject);
+    procedure AltroGiro(Sender: TObject);
   private
     var
       capitoli: array of byte;
       domande: array of byte;
       esatte: array of boolean;
-      currentIndex: byte;
-      esatteCont: byte;
+      currentIndex, esatteCont: integer;
       procedure NextDomanda;
       procedure DataRispostaEsatta;
       procedure DataRispostaErrata;
@@ -46,8 +48,8 @@ type
   public
     var
       capitolo: byte;
-      numDomande: byte;
-      casuali: boolean;
+      numDomande: integer;
+      casuali, tutte: boolean;
       tempoConcesso: integer;
   end;
 
@@ -67,14 +69,16 @@ end;  // FormClose()
 procedure TfDomanda.FormShow(Sender: TObject);
   var
     i, j: byte;
+    k: integer;
     domandaSelezionata: byte;
     capitoloSelezionato: byte;
     TimeOut: TDateTime;
 begin
+  SetLength(capitoli, numDomande);
+  SetLength(domande, numDomande);
+  SetLength(esatte, numDomande);
+
   if casuali then begin
-    SetLength(capitoli, numDomande);
-    SetLength(domande, numDomande);
-    SetLength(esatte, numDomande);
     i := 0;
     while i < numDomande do
     begin
@@ -98,20 +102,35 @@ begin
       end; // if
 
     end; // while
+
+  end else if tutte then
+  begin
+    k := 0;
+    for i := 1 to 18 do
+      for j := 1 to 20 do
+      begin
+        capitoli[k] := i;
+        domande[k] := j;
+        if (i = 13) and (j = 20) then
+        begin
+          Inc(k);
+          capitoli[k] := 13;
+          domande[k] := 21;
+        end;
+        Inc(k);
+      end;
+
   end else begin
     if capitolo = 13 then numDomande := 21 else numDomande := 20;
-    SetLength(capitoli, numDomande);
-    SetLength(domande, numDomande);
-    SetLength(esatte, numDomande);
     for i := 0 to numDomande-1 do
     begin
       capitoli[i] := capitolo;
       domande[i] := i+1;
     end; //for
-  end; // if..else
+  end; // if..else if
 
-  for i := 1 to numDomande do
-    clbRisultato.Items.Append('#'+ IntToStr(i) +' Cap. '+ IntToStr(capitoli[i-1]) +' Dom. ' +IntToStr(domande[i-1]));
+  for k := 1 to numDomande do
+    clbRisultato.Items.Append('#'+ IntToStr(k) +' Cap. '+ IntToStr(capitoli[k-1]) +' Dom. ' +IntToStr(domande[k-1]));
 
   currentIndex := 0;
   esatteCont := 0;
@@ -119,7 +138,7 @@ begin
 
   TimeOut := IncSecond(Now, tempoConcesso);
   Timer1.Enabled := True;
-  lbTimer.Caption := 'Tempo Rimasto '+ SecsToHmsStr(SecondsBetween(Now, TimeOut));
+  lbTimer.Caption := SecsToHmsStr(SecondsBetween(Now, TimeOut));
 
   NextDomanda;
 end; // FormShow()
@@ -257,8 +276,7 @@ end; // DataRispostaErrata()
 *)
 procedure TfDomanda.FineQuiz;
 var
-  i: byte;
-  risposteDateEsatte: byte;
+  i, risposteDateEsatte: integer;
   percentualeEsatte: byte;
 begin
   Timer1.Enabled := false;
@@ -269,8 +287,18 @@ begin
   ShowMessage( 'Hai dato '+ IntToStr(risposteDateEsatte) +
               ' risposte esatte su '+ IntToStr(numDomande) +
               ' ('+ IntToStr(percentualeEsatte) +'%)');
-  Close;
+
+  btDaiRisposta.Caption := 'ALTRO GIRO';
+  btDaiRisposta.OnClick := AltroGiro;
+  //Close;
 end; // FineQuiz()
+
+(*
+*)
+procedure TfDomanda.AltroGiro(Sender: TObject);
+begin
+  Close;
+end; // AtroGiro
 
 (*
 *)
@@ -280,7 +308,12 @@ begin
     Result := Default
   else
     Result := Value;
-end; // IfNull()
+end; procedure TfDomanda.lbTimerClick(Sender: TObject);
+begin
+
+end;
+
+// IfNull()
 
 (*
 *)
@@ -297,7 +330,7 @@ procedure TfDomanda.Timer1Timer(Sender: TObject);
 begin
   Dec(tempoConcesso);
   TimeOut := IncSecond(Now, tempoConcesso);
-  lbTimer.Caption := 'Tempo Rimasto '+ SecsToHmsStr(SecondsBetween(Now, TimeOut));
+  lbTimer.Caption := SecsToHmsStr(SecondsBetween(Now, TimeOut));
   if tempoConcesso <=0 then FineQuiz;
 end;
 
