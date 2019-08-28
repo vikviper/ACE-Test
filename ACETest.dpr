@@ -3,8 +3,7 @@ program ACETest;
 uses
   Vcl.Forms,
   Main in 'Main.pas' {fMain},
-  fDomande in 'fDomande.pas' {fDomanda},
-  fRisultati in 'fRisultati.pas' {fRisultato};
+  fDomande in 'fDomande.pas' {fDomanda};
 
 {$R *.res}
 

@@ -132,10 +132,6 @@
             <Form>fDomanda</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="fRisultati.pas">
-            <Form>fRisultato</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
