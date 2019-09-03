@@ -244,11 +244,12 @@ begin
     ParamByName('capitolo').Value := capitoli[currentIndex];
     ParamByName('numeroDomanda').Value := domande[currentIndex];
     ExecSQL;
-    ShowMessage('Risposta Esatta');
-    esatte[currentIndex] := true;
-  end; // with
 
-  Inc(esatteCont);
+    Inc(esatteCont);
+    lbEsatte.Caption := 'Risposte Esatte: '+IntToStr(esatteCont);
+    esatte[currentIndex] := true;
+    ShowMessage('Risposta Esatta');
+  end; // with
 end; // DataRispostaEsatta()
 
 (*

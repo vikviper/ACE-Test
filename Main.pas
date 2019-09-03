@@ -81,7 +81,7 @@ begin
   fDomanda := TfDomanda.Create(self);
   with fDomanda do begin
     capitolo := StrToInt(teCapitolo.Text);
-    numDomande := 0;
+    numDomande := 20;
     casuali := false;
     tutte := false;
     tempoConcesso := 2880;
